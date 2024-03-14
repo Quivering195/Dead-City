@@ -14,13 +14,53 @@ namespace Ring
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Game Controller")]
         [ChangeColorLabel(0.2f, 1, 1)] public GameObject _player;
     }
+    #region Player
+    #region Skins
 
-    [Serializable]
-    public class PlayerController
+    public enum PlayerSkin
     {
-        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Player Controller")]
-        [ChangeColorLabel(0.2f, 1, 1)] public Rigidbody _rigidbodyWeapon;
+        Skin1,
+        Skin2,
+        Skin3,
+        Skin4,
+        Skin5,
+        Skin6,
+        Skin7,
+        Skin8,
+        Skin9,
+        Skin10,
+        Skin11,
+        Skin12,
+        Skin13,
+        Skin14,
+        Skin15
     }
+    [Serializable]
+    public class ChangeSkins
+    {
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Skins")]
+        [ChangeColorLabel(0.2f, 1, 1)] public PlayerSkin selectedSkin;
+        [ChangeColorLabel(0.2f, 1, 1)] public List<GameObject> listObjectSkins;
+    }
+    #endregion
+    [Serializable]
+    public class PlayerComponent
+    {
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Component")]
+        [ChangeColorLabel(0.2f, 1, 1)] public Rigidbody _rigidbody;
+        [ChangeColorLabel(0.2f, 1, 1)] public GameObject _objectModel;
+        [ChangeColorLabel(0.2f, 1, 1)] public Collider _collider;
+    }
+    [Serializable]
+    public class PlayerMovement
+    {
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Movement")]
+        [ChangeColorLabel(0.2f, 1, 1)] public Vector3 _direction;
+        [ChangeColorLabel(0.2f, 1, 1)] public float _speed;
+        [ChangeColorLabel(0.2f, 1, 1)] public float _moveX;
+        [ChangeColorLabel(0.2f, 1, 1)] public float _moveY;
+    }
+    #endregion
 
     [Serializable]
     public class BotController
