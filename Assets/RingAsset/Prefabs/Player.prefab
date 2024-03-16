@@ -171,6 +171,9 @@ MonoBehaviour:
     _speed: 255
     _moveX: 0
     _moveY: 0
+  CinemachineCameraTarget: {fileID: 0}
+  BottomClamp: -30
+  TopClamp: 70
 --- !u!114 &7791784357205852734
 MonoBehaviour:
   m_ObjectHideFlags: 0
