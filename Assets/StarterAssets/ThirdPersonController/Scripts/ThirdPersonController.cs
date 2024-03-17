@@ -1,4 +1,7 @@
-﻿ using UnityEngine;
+﻿using System.Linq;
+using System;
+using UnityEditor;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -122,7 +125,7 @@ namespace StarterAssets
             }
         }
 
-
+       
         private void Awake()
         {
             // get a reference to our main camera
@@ -375,7 +378,7 @@ namespace StarterAssets
             {
                 if (FootstepAudioClips.Length > 0)
                 {
-                    var index = Random.Range(0, FootstepAudioClips.Length);
+                    var index = UnityEngine.Random.Range(0, FootstepAudioClips.Length);
                     AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
                 }
             }
@@ -390,3 +393,4 @@ namespace StarterAssets
         }
     }
 }
+
