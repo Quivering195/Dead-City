@@ -19,9 +19,16 @@ namespace StarterAssets
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
-
+		public PlayerInput _playerInput;
 #if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
+        private void Start()
+        {
+			if (_playerInput.GetType() == typeof(PlayerInput))
+			{
+				Debug.Log(_playerInput.GetType().ToString());
+			}
+        }
+        public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}
@@ -42,6 +49,10 @@ namespace StarterAssets
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
+		}
+		public void OnAima(InputValue value)
+		{
+			Debug.Log(value.isPressed);
 		}
 #endif
 
