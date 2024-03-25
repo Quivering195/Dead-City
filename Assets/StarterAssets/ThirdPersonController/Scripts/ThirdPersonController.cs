@@ -1,17 +1,18 @@
-﻿using System.Linq;
-using System;
-using UnityEditor;
-using UnityEngine;
-#if ENABLE_INPUT_SYSTEM 
+﻿using UnityEngine;
+
+#if ENABLE_INPUT_SYSTEM
+
 using UnityEngine.InputSystem;
+
 #endif
 
 namespace StarterAssets
 {
-    [RequireComponent(typeof(CharacterController))]
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
+
     [RequireComponent(typeof(PlayerInput))]
 #endif
+    [RequireComponent(typeof(CharacterController))]
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
@@ -27,6 +28,8 @@ namespace StarterAssets
 
         [Tooltip("Acceleration and deceleration")]
         public float SpeedChangeRate = 10.0f;
+
+        public float Sensivity = 1.0f;
 
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
@@ -77,10 +80,12 @@ namespace StarterAssets
 
         // cinemachine
         private float _cinemachineTargetYaw;
+
         private float _cinemachineTargetPitch;
 
         // player
         private float _speed;
+
         private float _animationBlend;
         private float _targetRotation = 0.0f;
         private float _rotationVelocity;
@@ -89,16 +94,18 @@ namespace StarterAssets
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
+
         private float _fallTimeoutDelta;
 
         // animation IDs
         private int _animIDSpeed;
+
         private int _animIDGrounded;
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
 #endif
         private Animator _animator;
@@ -122,7 +129,6 @@ namespace StarterAssets
             }
         }
 
-       
         private void Awake()
         {
             // get a reference to our main camera
@@ -135,10 +141,16 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
+#if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
+#else
+			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
+#endif
+
             AssignAnimationIDs();
 
             // reset our timeouts on start
@@ -192,8 +204,8 @@ namespace StarterAssets
                 //Don't multiply mouse input by Time.deltaTime;
                 float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
-                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
+                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier * Sensivity;
+                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier * Sensivity;
             }
 
             // clamp our rotations so our values are limited 360 degrees
@@ -257,7 +269,6 @@ namespace StarterAssets
                 // rotate to face input direction relative to camera position
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
-
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
@@ -369,7 +380,7 @@ namespace StarterAssets
             {
                 if (FootstepAudioClips.Length > 0)
                 {
-                    var index = UnityEngine.Random.Range(0, FootstepAudioClips.Length);
+                    var index = Random.Range(0, FootstepAudioClips.Length);
                     AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
                 }
             }
@@ -382,6 +393,11 @@ namespace StarterAssets
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
+
+        public void SetSentivity(float sentivity)
+        {
+            this.Sensivity = sentivity;
+            Debug.Log("sentivity : " + sentivity);
+        }
     }
 }
-

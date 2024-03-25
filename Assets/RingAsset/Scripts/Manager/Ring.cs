@@ -1,20 +1,16 @@
-﻿using System;
+﻿using Cinemachine;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
+using StarterAssets;
 
 namespace Ring
 {
     #region Component
 
-    [Serializable]
-    public class GameController
-    {
-        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Game Controller")]
-        [ChangeColorLabel(0.2f, 1, 1)] public GameObject _player;
-    }
     #region Player
+
     #region Skins
 
     public enum PlayerSkin
@@ -35,32 +31,47 @@ namespace Ring
         Skin14,
         Skin15
     }
+
     [Serializable]
     public class ChangeSkins
     {
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Skins")]
         [ChangeColorLabel(0.2f, 1, 1)] public PlayerSkin selectedSkin;
+
         [ChangeColorLabel(0.2f, 1, 1)] public List<GameObject> listObjectSkins;
     }
-    #endregion
+
+    #endregion Skins
+
     [Serializable]
     public class PlayerComponent
     {
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Component")]
         [ChangeColorLabel(0.2f, 1, 1)] public Rigidbody _rigidbody;
+
         [ChangeColorLabel(0.2f, 1, 1)] public GameObject _objectModel;
         [ChangeColorLabel(0.2f, 1, 1)] public Collider _collider;
     }
+
     [Serializable]
     public class PlayerMovement
     {
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Movement")]
         [ChangeColorLabel(0.2f, 1, 1)] public Vector3 _direction;
+
         [ChangeColorLabel(0.2f, 1, 1)] public float _speed;
         [ChangeColorLabel(0.2f, 1, 1)] public float _moveX;
         [ChangeColorLabel(0.2f, 1, 1)] public float _moveY;
     }
-    #endregion
+
+    #endregion Player
+
+    [Serializable]
+    public class GameController
+    {
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Game Controller")]
+        [ChangeColorLabel(0.2f, 1, 1)] public GameObject _player;
+    }
 
     [Serializable]
     public class BotController
@@ -74,8 +85,9 @@ namespace Ring
     {
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Audio Clip")]
         [ChangeColorLabel(0.9f, .55f, .95f)] public AudioClip audioClip_;
+
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Audio Source")]
-        [ChangeColorLabel(0.2f, 1, 1)] public AudioSource audioSource_;
+        [ChangeColorLabel(0.2f, 1, 1)] public AudioSource audioSource_BackGround;
     }
 
     [Serializable]
@@ -86,6 +98,21 @@ namespace Ring
     }
 
     [Serializable]
+    public class ShooterController
+    {
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Shooter Controller")]
+        [ChangeColorLabel(0.2f, 1, 1)] public CinemachineVirtualCamera _aimVirtualCamera;
+
+        [ChangeColorLabel(0.2f, 1, 1)] public StarterAssetsInputs _starterAssetsInputs;
+        [ChangeColorLabel(0.2f, 1, 1)] public ThirdPersonController _thirdPersonController;
+        [ChangeColorLabel(0.2f, 1, 1)] public float _normalSentivity;
+        [ChangeColorLabel(0.2f, 1, 1)] public float _aimSentivity;
+        [ChangeColorLabel(0.2f, 1, 1)] public float _consoleSentivity;
+    }
+
+    #endregion Component
+
+    [Serializable]
     public class CheckScene
     {
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Check Scene")]
@@ -93,8 +120,6 @@ namespace Ring
 
         [ChangeColorLabel(.7f, 1f, 1f)] public string _nameSceneChange;
     }
-
-    #endregion Component
 
     #region Text Color
 
@@ -205,6 +230,7 @@ namespace Ring
         private Dictionary<GameObject, Vector3> originalPositions = new Dictionary<GameObject, Vector3>();
 
         #region Saving Position Object
+
         //Load luôn position sau khi dừng play
         [MenuItem("Ring/Save Position/Saving Position - After Play Load Position Now")]
         public static void ShowWindow()
@@ -267,6 +293,7 @@ namespace Ring
         private Dictionary<GameObject, Vector3> originalPositions = new Dictionary<GameObject, Vector3>();
 
         #region Object Position Saver
+
         //Cho phép chọn load hay không sau khi play
         [MenuItem("Ring/Save Position/Saving Position - After Play, Change Button Load Position")]
         public static void ShowWindow()
@@ -310,6 +337,7 @@ namespace Ring
     public class TransformListEditorWindow : EditorWindow
     {
         [SerializeField] private Transform[] objectList;
+
         //Lưu transform cho list object
         [MenuItem("Ring/Save Position/Save Transform List - VIP(Save Even While Playing)")]
         public static void ShowWindow()
@@ -435,6 +463,7 @@ namespace Ring
             return Quaternion.identity;
         }
     }
+
     #endregion Save Position Object
 
     #region Rename
@@ -446,6 +475,7 @@ namespace Ring
         private SerializedObject so;
         private SerializedProperty scenesProp;
         private int startingNumber;
+
         //Thay tên scenes
         [MenuItem("Ring/Rename/Scenes")]
         public static void ShowWindow()
@@ -496,6 +526,7 @@ namespace Ring
         private SerializedProperty assetsProp;
         private string startingNumber;
         private bool isAddNumber;
+
         //Thay tên object trên Prefabs
         [MenuItem("Ring/Rename/Assets")]
         public static void ShowWindow()
@@ -566,6 +597,7 @@ namespace Ring
         private SerializedProperty objectsProp;
         private bool isAddNumber;
         public List<GameObject> objectsToRename;
+
         //Thay tên object trên scene
         [MenuItem("Ring/Rename/Objects In Scene")]
         public static void ShowWindow()
@@ -637,6 +669,7 @@ namespace Ring
     {
         private SerializedObject so;
         private SerializedProperty assetsProp;
+
         //Thay tên hoặc các thuộc tính cho object trên scene
         [MenuItem("Ring/Rename/Rename Prefabs Tag,Name,Layer,Position...")]
         public static void ShowWindow()
@@ -692,12 +725,14 @@ namespace Ring
         }
     }
 
-    #endregion
+    #endregion Rename Tag Object Scene
 
     #endregion Rename
+
     #region Component
 
     #region CopyComponent
+
     //copy component prefabs
     public class CopyComponentEditorWindow : EditorWindow
     {
@@ -743,6 +778,7 @@ namespace Ring
     #endregion CopyComponent
 
     #region GetComponent
+
     public class ObjectTouchColliderEditorWindow : EditorWindow
     {
         //Get component in editor
@@ -776,8 +812,9 @@ namespace Ring
     }
 
     #endregion GetComponent
-   
-    #endregion
+
+    #endregion Component
+
 #endif
 
     #endregion Editor Window

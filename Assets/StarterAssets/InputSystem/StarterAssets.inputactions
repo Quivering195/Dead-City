@@ -43,7 +43,7 @@
                 },
                 {
                     "name": "Aim",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "51e19f39-9199-400c-9bf4-7b5b4f99c3e9",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -231,10 +231,21 @@
                 {
                     "name": "",
                     "id": "b7beb66c-8389-4c94-829a-aa424f542e4c",
-                    "path": "<XInputController>/buttonWest",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad;Xbox Controller",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47ffaabb-95d1-4e88-9a63-0e015db14843",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false

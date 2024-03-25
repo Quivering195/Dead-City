@@ -19,6 +19,6 @@ public class MusicManager : RingSingleton<MusicManager>
 
     public void PlayerBackGround()
     {
-        //_musicController.audioSource_BackGround.Play();
+        _musicController.audioSource_BackGround.Play();
     }
 }
