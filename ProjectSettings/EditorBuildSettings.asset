@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/RingAsset/Level/IntroGame/Intro.unity
+    guid: f86b9e68c329d8740a5bb0f1dab264e3
   m_configObjects: {}
