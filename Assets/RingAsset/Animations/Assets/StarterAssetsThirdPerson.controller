@@ -27,14 +27,14 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-6568449025127932983
+--- !u!1102 &-6343242258609494974
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TPOSE
+  m_Name: Aiming
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -47,7 +47,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 73ec5b9c61d085644aa42ba8628646b0, type: 2}
+  m_Motion: {fileID: 7400000, guid: 55bba28bcff29db4ab413b534f37154f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -75,8 +75,11 @@ AnimatorStateMachine:
     m_State: {fileID: 2316907928501487792}
     m_Position: {x: 0, y: 490, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -6568449025127932983}
-    m_Position: {x: 762.99994, y: 392.9475, z: 0}
+    m_State: {fileID: -6343242258609494974}
+    m_Position: {x: -180.64441, y: 393.85648, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 6653094183513520812}
+    m_Position: {x: 568.5385, y: 409.14832, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -229,7 +232,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d33eedb2231d01e42a31e475c4733d85, type: 2}
+  m_Motion: {fileID: 7400000, guid: 07e684a273754c541bb7d8f00dd07aef, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -485,7 +488,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -2623921762567154784}
-    m_Position: {x: 372.92065, y: 51.535995, z: 0}
+    m_Position: {x: 370, y: 50, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -543,6 +546,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
+--- !u!1102 &6653094183513520812
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Tpose
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 78776bc542bd78e4ebf621b1c9e4e467, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &6904719651407550685
 AnimatorState:
   serializedVersion: 6
@@ -630,7 +659,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 9d8089266125d0944a9462b62ef7f56d, type: 2}
+    m_Motion: {fileID: 7400000, guid: 07e684a273754c541bb7d8f00dd07aef, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
