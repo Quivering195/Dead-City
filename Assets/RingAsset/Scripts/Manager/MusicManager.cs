@@ -14,7 +14,8 @@ public class MusicManager : RingSingleton<MusicManager>
 
     public void PlayAudio_Grenade()
     {
-        //_musicController.audioSource_Grenade.PlayOneShot(_musicController.audioClip_Grenade);
+        _musicController.audioSource_ShootGun.PlayOneShot(
+            _musicController.listAudioClip_ShootGun[Random.Range(0, _musicController.listAudioClip_ShootGun.Count)]);
     }
 
     public void PlayerBackGround()

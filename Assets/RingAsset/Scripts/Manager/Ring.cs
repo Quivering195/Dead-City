@@ -5,6 +5,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using StarterAssets;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.SceneManagement;
 
 namespace Ring
@@ -86,7 +87,10 @@ namespace Ring
     public class MusicController
     {
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Audio Clip")] [ChangeColorLabel(0.9f, .55f, .95f)]
-        public AudioClip audioClip_;
+        public List<AudioClip> listAudioClip_ShootGun;
+
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Audio Source")] [ChangeColorLabel(0.2f, 1, 1)]
+        public AudioSource audioSource_ShootGun;
 
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Audio Source")] [ChangeColorLabel(0.2f, 1, 1)]
         public AudioSource audioSource_BackGround;
@@ -105,6 +109,10 @@ namespace Ring
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Shooter Controller")] [ChangeColorLabel(0.2f, 1, 1)]
         public CinemachineVirtualCamera _aimVirtualCamera;
 
+        [ChangeColorLabel(0.2f, 1, 1)] public List<MultiAimConstraint> _listMultiAim;
+        [ChangeColorLabel(0.2f, 1, 1)] public RigBuilder _listRigAim;
+        [ChangeColorLabel(0.2f, 1, 1)] public Transform _targetAim;
+        [ChangeColorLabel(0.2f, 1, 1)] public Transform _targetDontAim;
         [ChangeColorLabel(0.2f, 1, 1)] public StarterAssetsInputs _starterAssetsInputs;
         [ChangeColorLabel(0.2f, 1, 1)] public ThirdPersonController _thirdPersonController;
         [ChangeColorLabel(0.2f, 1, 1)] public float _normalSentivity;

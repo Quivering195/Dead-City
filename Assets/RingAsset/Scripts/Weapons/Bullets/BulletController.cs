@@ -9,7 +9,7 @@ public class BulletController : MonoBehaviour
     [SerializeField] private Transform vfxHitDamage;
     [SerializeField] private Transform vfxNoDamage;
     private Rigidbody _rigidbody;
-    private float _speed = 10f;
+    [SerializeField] private float _speed = 40f;
 
     void Awake()
     {

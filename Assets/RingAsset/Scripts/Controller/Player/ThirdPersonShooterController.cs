@@ -1,11 +1,12 @@
 using System.Collections;
 using Lean.Pool;
 using Ring;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class ThirdPersonShooterController : MonoBehaviour
+public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterController>
 {
     public ShooterController _shooterController;
     public bool isCheck;
@@ -55,13 +56,37 @@ public class ThirdPersonShooterController : MonoBehaviour
             worldAimTarget.y = transform.position.y;
             Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+            /*if (!_shooterController._listMultiAim[0].data.sourceObjects.GetTransform(0) !=
+                _shooterController._targetAim)
+            {
+                for (int i = 0; i < _shooterController._listMultiAim.Count; i++)
+                {
+                    var data = _shooterController._listMultiAim[i].data.sourceObjects;
+                    data.SetTransform(0, _shooterController._targetAim);
+                    _shooterController._listMultiAim[i].data.sourceObjects = data;
+
+                    _shooterController._listRigAim.Build();
+                }
+            }*/
         }
         else
         {
+            /*if (!_shooterController._listMultiAim[0].data.sourceObjects.GetTransform(0) !=
+                _shooterController._targetDontAim)
+            {
+                for (int i = 0; i < _shooterController._listMultiAim.Count; i++)
+                {
+                    var data = _shooterController._listMultiAim[i].data.sourceObjects;
+                    data.SetTransform(0, _shooterController._targetDontAim);
+                    _shooterController._listMultiAim[i].data.sourceObjects = data;
+                    _shooterController._listRigAim.Build();
+                }
+            }*/
+
             _shooterController._thirdPersonController.SetRotationOnMove(true);
             _shooterController._aimVirtualCamera.gameObject.SetActive(false);
-            _shooterController._animator.SetLayerWeight(1,
-                Mathf.Lerp(_shooterController._animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));
+            /*_shooterController._animator.SetLayerWeight(1,
+                Mathf.Lerp(_shooterController._animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));*/
             if (isCheck)
             {
                 SentivityConsole();
@@ -74,8 +99,9 @@ public class ThirdPersonShooterController : MonoBehaviour
             }
         }
 
-        if (_shooterController._starterAssetsInputs.shoot)
+        if (_shooterController._starterAssetsInputs.shoot && _shooterController._starterAssetsInputs.aim)
         {
+            MusicManager.Instance.PlayAudio_Grenade();
             Vector3 aimDir = (mouseWorltPosition - _positionSpawnBullet.position).normalized;
 
             LeanPool.Spawn(_prefabButlletSpawn, _positionSpawnBullet.position,
