@@ -103,7 +103,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
 #endif
-        private Animator _animator;
+        public Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
@@ -224,7 +224,7 @@ namespace StarterAssets
             }
             else if (targetSpeed == MoveSpeed)
             {
-                Debug.Log(2);
+                //Debug.Log(2);
                 ThirdPersonShooterController.Instance._shooterController._animator.SetLayerWeight(1,
                     Mathf.Lerp(ThirdPersonShooterController.Instance._shooterController._animator.GetLayerWeight(1), 0f,
                         Time.deltaTime * 10f));

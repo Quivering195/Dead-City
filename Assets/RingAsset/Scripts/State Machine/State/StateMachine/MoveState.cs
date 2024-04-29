@@ -3,7 +3,9 @@
 public class MoveState : State
 {
     protected D_MoveState dataState;
-    public MoveState(BotManager botManager, FiniteStateMachine stateMachine, D_MoveState dataState) : base(botManager, stateMachine)
+
+    public MoveState(BotManager botManager, FiniteStateMachine stateMachine, string animName, D_MoveState dataState) :
+        base(botManager, stateMachine, animName)
     {
         this.dataState = dataState;
     }
@@ -11,7 +13,6 @@ public class MoveState : State
     public override void Enter()
     {
         base.Enter();
-
     }
 
     public override void Exit()
@@ -22,7 +23,6 @@ public class MoveState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
     }
 
     public override void PhysicsUpdate()

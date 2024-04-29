@@ -29,7 +29,7 @@ namespace StarterAssets
         {
             if (_playerInput.GetType() == typeof(PlayerInput))
             {
-                Debug.Log(_playerInput.GetType().ToString());
+                //Debug.Log(_playerInput.GetType().ToString());
             }
         }
 

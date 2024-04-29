@@ -1,10 +1,14 @@
-﻿using Ring;
+﻿using System.Diagnostics;
+using System.IO;
+using Ring;
+using UnityEditor;
 using UnityEngine;
 
 public class BotManager : MonoBehaviour
 {
-    [HeaderTextColor(0.2f, .7f, .8f, headerText = "Player Component")] public BotManager _botController;
-    
+    [HeaderTextColor(0.2f, .7f, .8f, headerText = "Player Component")]
+    public BotController _botController;
+
     public FiniteStateMachine stateMachine;
 
     public virtual void Start()
@@ -15,9 +19,7 @@ public class BotManager : MonoBehaviour
 
     private void StateMachineBot()
     {
-        //getComponentBot
         stateMachine = new FiniteStateMachine();
-        
     }
 
     private void Intil()
@@ -26,7 +28,6 @@ public class BotManager : MonoBehaviour
 
     public void ActiveRagdoll()
     {
-        
     }
 
     public virtual void Update()
@@ -38,4 +39,11 @@ public class BotManager : MonoBehaviour
     {
         stateMachine.currentState.PhysicsUpdate();
     }
+
+    public virtual void SetBackDamage(float direction)
+    {
+        _botController._rigidbody.AddForce(_botController._directionBackDamage * 25, ForceMode.Impulse);
+    }
+
+
 }

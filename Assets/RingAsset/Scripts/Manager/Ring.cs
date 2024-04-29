@@ -7,6 +7,7 @@ using UnityEngine;
 using StarterAssets;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace Ring
 {
@@ -50,21 +51,9 @@ namespace Ring
     public class PlayerComponent
     {
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Component")] [ChangeColorLabel(0.2f, 1, 1)]
-        public Rigidbody _rigidbody;
+        public GameObject _transform;
 
-        [ChangeColorLabel(0.2f, 1, 1)] public GameObject _objectModel;
         [ChangeColorLabel(0.2f, 1, 1)] public Collider _collider;
-    }
-
-    [Serializable]
-    public class PlayerMovement
-    {
-        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Movement")] [ChangeColorLabel(0.2f, 1, 1)]
-        public Vector3 _direction;
-
-        [ChangeColorLabel(0.2f, 1, 1)] public float _speed;
-        [ChangeColorLabel(0.2f, 1, 1)] public float _moveX;
-        [ChangeColorLabel(0.2f, 1, 1)] public float _moveY;
     }
 
     #endregion Player
@@ -80,7 +69,22 @@ namespace Ring
     public class BotController
     {
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Bot Controller")] [ChangeColorLabel(0.2f, 1, 1)]
-        public Rigidbody _rigidbodyBot;
+        public Rigidbody _rigidbody;
+
+        public Collider _collider;
+
+        public Animator _animator;
+
+        public Transform _transform;
+        public Vector3 _directionMove;
+        public bool _isFindPlayer;
+        public int _facingDirection;
+        public Vector3 _directionBackDamage;
+
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Check Player")] [ChangeColorLabel(0.2f, 1, 1)]
+        public LayerMask _layerMask; // Layer để kiểm tra
+
+        public float _radius = 5f; // Bán kính của hình cầu
     }
 
     [Serializable]

@@ -1,22 +1,20 @@
-
 using UnityEngine;
 
 public class DieState : State
 {
-    public DieState(BotManager botManager, FiniteStateMachine stateMachine) : base(botManager, stateMachine)
+    public DieState(BotManager botManager, FiniteStateMachine stateMachine, string animName) : base(botManager,
+        stateMachine, animName)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-        
     }
 
     public override void Exit()
     {
         base.Exit();
-
     }
 
     public override void LogicUpdate()

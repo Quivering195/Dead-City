@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AttackState : State
 {
-    public AttackState(BotManager botManager, FiniteStateMachine stateMachine) : base(botManager, stateMachine)
+    public AttackState(BotManager botManager, FiniteStateMachine stateMachine, string animName) : base(botManager,
+        stateMachine, animName)
     {
     }
 
@@ -16,18 +17,15 @@ public class AttackState : State
     public override void Exit()
     {
         base.Exit();
-        
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-       
     }
-   
+
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
     }
-
 }

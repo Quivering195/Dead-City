@@ -56,7 +56,7 @@ public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterCont
             worldAimTarget.y = transform.position.y;
             Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
-            /*if (!_shooterController._listMultiAim[0].data.sourceObjects.GetTransform(0) !=
+            if (_shooterController._listMultiAim[0].data.sourceObjects.GetTransform(0) !=
                 _shooterController._targetAim)
             {
                 for (int i = 0; i < _shooterController._listMultiAim.Count; i++)
@@ -64,14 +64,15 @@ public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterCont
                     var data = _shooterController._listMultiAim[i].data.sourceObjects;
                     data.SetTransform(0, _shooterController._targetAim);
                     _shooterController._listMultiAim[i].data.sourceObjects = data;
-
+                    _shooterController._thirdPersonController._animator.enabled = false;
                     _shooterController._listRigAim.Build();
+                    _shooterController._thirdPersonController._animator.enabled = true;
                 }
-            }*/
+            }
         }
         else
         {
-            /*if (!_shooterController._listMultiAim[0].data.sourceObjects.GetTransform(0) !=
+            if (_shooterController._listMultiAim[0].data.sourceObjects.GetTransform(0) !=
                 _shooterController._targetDontAim)
             {
                 for (int i = 0; i < _shooterController._listMultiAim.Count; i++)
@@ -79,34 +80,37 @@ public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterCont
                     var data = _shooterController._listMultiAim[i].data.sourceObjects;
                     data.SetTransform(0, _shooterController._targetDontAim);
                     _shooterController._listMultiAim[i].data.sourceObjects = data;
+                    _shooterController._thirdPersonController._animator.enabled = false;
                     _shooterController._listRigAim.Build();
+                    _shooterController._thirdPersonController._animator.enabled = true;
                 }
-            }*/
+            }
 
             _shooterController._thirdPersonController.SetRotationOnMove(true);
             _shooterController._aimVirtualCamera.gameObject.SetActive(false);
-            /*_shooterController._animator.SetLayerWeight(1,
-                Mathf.Lerp(_shooterController._animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));*/
             if (isCheck)
             {
                 SentivityConsole();
-                Debug.Log("Xbox");
+                Debug.LogWarning("Xbox");
             }
             else
             {
                 SentivityKeyBoard();
-                Debug.Log("Key Board");
+                Debug.LogWarning("Key Board");
             }
+
+            //reset shoot
+            _shooterController._starterAssetsInputs.shoot = false;
         }
 
         if (_shooterController._starterAssetsInputs.shoot && _shooterController._starterAssetsInputs.aim)
         {
+            Debug.Log(1);
             MusicManager.Instance.PlayAudio_Grenade();
             Vector3 aimDir = (mouseWorltPosition - _positionSpawnBullet.position).normalized;
-
             LeanPool.Spawn(_prefabButlletSpawn, _positionSpawnBullet.position,
                 Quaternion.LookRotation(aimDir, Vector3.up));
-            _shooterController._starterAssetsInputs.shoot = false;
+            //_shooterController._starterAssetsInputs.shoot = false;
         }
     }
 
