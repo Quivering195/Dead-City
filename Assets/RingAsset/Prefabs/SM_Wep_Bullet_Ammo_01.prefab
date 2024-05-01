@@ -239,7 +239,7 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vfxHitDamage: {fileID: 3583928226933845689, guid: 0432792e7ae340449abbb48665af64a5, type: 3}
   vfxNoDamage: {fileID: 3583928226933845689, guid: 84333dbac5a25e949b4b0a8e1d40dcdb, type: 3}
-  _speed: 40
+  _speed: 55
 --- !u!54 &-8867219692315939485
 Rigidbody:
   m_ObjectHideFlags: 0

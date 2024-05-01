@@ -5,21 +5,11 @@ using UnityEngine;
 public class PlayerController : RingSingleton<PlayerController>
 {
     public PlayerComponent playerComponent;
+    public PlayerSkins playerSkins;
 
-    void Start()
+    public void ResetFire()
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-    void FixedUpdate()
-    {
-    }
-
-    private void LateUpdate()
-    {
+        playerComponent._thirdPersonShooterController._shooterController._isCheckReload = false;
+        playerComponent._thirdPersonShooterController._shooterController._animator.SetLayerWeight(2, 0);
     }
 }

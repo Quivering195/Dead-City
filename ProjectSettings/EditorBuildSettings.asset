@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/RingAsset/Level/IntroGame/Intro.unity
     guid: f86b9e68c329d8740a5bb0f1dab264e3
   - enabled: 1
-    path: Assets/RingAsset/Level/Map1/Map1.unity
+    path: Assets/RingAsset/Level/Map1/1.unity
     guid: e693fb2e51fa599488a7f68ac51c5c88
+  - enabled: 1
+    path: Assets/RingAsset/Level/MenuScene.unity
+    guid: 68c53cd889fad4e4b89067ba32b9f6ec
   m_configObjects: {}

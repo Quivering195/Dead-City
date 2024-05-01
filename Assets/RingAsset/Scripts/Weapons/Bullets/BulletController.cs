@@ -22,9 +22,9 @@ public class BulletController : MonoBehaviour
         _rigidbody.velocity = transform.forward * _speed;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.GetComponent<BulletTarget>() != null)
+        if (other.gameObject.GetComponent<BulletTarget>() != null)
         {
             LeanPool.Spawn(vfxHitDamage, transform.position, Quaternion.identity);
         }

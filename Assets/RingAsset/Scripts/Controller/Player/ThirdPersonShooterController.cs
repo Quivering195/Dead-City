@@ -41,6 +41,12 @@ public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterCont
         }
 
         MouseSentivity(mouseWorldPosition);
+        if (_shooterController._starterAssetsInputs.reload && !_shooterController._isCheckReload)
+        {
+            _shooterController._isCheckReload = true;
+            _shooterController._animator.SetLayerWeight(2, 1);
+            _shooterController._animator.SetTrigger("Reload");
+        }
     }
 
     private void MouseSentivity(Vector3 mouseWorltPosition)

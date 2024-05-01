@@ -8,6 +8,7 @@ using StarterAssets;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Ring
 {
@@ -54,6 +55,14 @@ namespace Ring
         public GameObject _transform;
 
         [ChangeColorLabel(0.2f, 1, 1)] public Collider _collider;
+        [ChangeColorLabel(0.2f, 1, 1)] public ThirdPersonShooterController _thirdPersonShooterController;
+    }
+
+    [Serializable]
+    public class PlayerSkins
+    {
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Component")] [ChangeColorLabel(0.2f, 1, 1)]
+        public List<Transform> _listSkin;
     }
 
     #endregion Player
@@ -62,7 +71,9 @@ namespace Ring
     public class GameController
     {
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Game Controller")] [ChangeColorLabel(0.2f, 1, 1)]
-        public GameObject _player;
+        public string _nameScene;
+
+        [ChangeColorLabel(0.2f, 1, 1)] public int _currentBuy;
     }
 
     [Serializable]
@@ -104,7 +115,15 @@ namespace Ring
     public class UiController
     {
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Ui Controller")] [ChangeColorLabel(0.2f, 1, 1)]
-        public GameObject _winGameObject;
+        public Transform _loadScene;
+
+        [ChangeColorLabel(0.2f, 1, 1)] public FillAmountController _fillAmountController;
+
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Shop")] [ChangeColorLabel(0.2f, 1, 1)]
+        public Transform _priceSkin;
+
+        [ChangeColorLabel(0.2f, 1, 1)] public Transform _doneSkin;
+        [ChangeColorLabel(0.2f, 1, 1)] public Button _buySkin;
     }
 
     [Serializable]
@@ -125,8 +144,11 @@ namespace Ring
         [ChangeColorLabel(0.2f, 1, 1)] public LayerMask _aimColliderLayerMask;
         [ChangeColorLabel(0.2f, 1, 1)] public Animator _animator;
 
-        [MinMax(-5f, 5f)] [ChangeColorLabel(0.2f, 1, 1)]
-        public float _rotateAim;
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Rig")] [ChangeColorLabel(0.2f, 1, 1)]
+        public Rig _rig;
+
+        [ChangeColorLabel(0.2f, 1, 1)] public TwoBoneIKConstraint _secondHandRig;
+        [ChangeColorLabel(0.2f, 1, 1)] public bool _isCheckReload;
     }
 
     #endregion Component
