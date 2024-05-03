@@ -38,5 +38,7 @@ public class SetMusic : MonoBehaviour
         {
             GameManager.Instance.SaveSound(_slider.value);
         }
+
+        MusicManager.Instance.SetUpVolume();
     }
 }

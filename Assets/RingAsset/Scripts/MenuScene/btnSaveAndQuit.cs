@@ -14,5 +14,6 @@ public class btnSaveAndQuit : MonoBehaviour
 
     private void ActionClick()
     {
+        Application.Quit();
     }
 }

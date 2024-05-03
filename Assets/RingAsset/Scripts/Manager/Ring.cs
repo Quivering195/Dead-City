@@ -56,13 +56,32 @@ namespace Ring
 
         [ChangeColorLabel(0.2f, 1, 1)] public Collider _collider;
         [ChangeColorLabel(0.2f, 1, 1)] public ThirdPersonShooterController _thirdPersonShooterController;
+        [ChangeColorLabel(0.2f, 1, 1)] public Animator _animator;
     }
 
     [Serializable]
     public class PlayerSkins
     {
-        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Component")] [ChangeColorLabel(0.2f, 1, 1)]
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Skins")] [ChangeColorLabel(0.2f, 1, 1)]
         public List<Transform> _listSkin;
+
+        [ChangeColorLabel(0.2f, 1, 1)] public List<Transform> _listWeapon;
+    }
+
+    [Serializable]
+    public class PlayerWeapon
+    {
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Weapons")] [ChangeColorLabel(0.2f, 1, 1)]
+        public List<Transform> _listWeapons;
+    }
+
+    [Serializable]
+    public class PlayerHealth
+    {
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Weapons")] [ChangeColorLabel(0.2f, 1, 1)]
+        public int _health;
+
+        [ChangeColorLabel(0.2f, 1, 1)] public int _giap;
     }
 
     #endregion Player
@@ -109,6 +128,9 @@ namespace Ring
 
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Audio Source")] [ChangeColorLabel(0.2f, 1, 1)]
         public AudioSource audioSource_BackGround;
+
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Audio Source")] [ChangeColorLabel(0.2f, 1, 1)]
+        public List<AudioSource> audioSource_Fire;
     }
 
     [Serializable]
@@ -117,13 +139,30 @@ namespace Ring
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Ui Controller")] [ChangeColorLabel(0.2f, 1, 1)]
         public Transform _loadScene;
 
+        [ChangeColorLabel(0.2f, 1, 1)] public Transform _allButtons;
         [ChangeColorLabel(0.2f, 1, 1)] public FillAmountController _fillAmountController;
 
         [HeaderTextColor(0.2f, .7f, .8f, headerText = "Shop")] [ChangeColorLabel(0.2f, 1, 1)]
-        public Transform _priceSkin;
+        public Transform _priceItem;
 
-        [ChangeColorLabel(0.2f, 1, 1)] public Transform _doneSkin;
-        [ChangeColorLabel(0.2f, 1, 1)] public Button _buySkin;
+        [ChangeColorLabel(0.2f, 1, 1)] public Transform _doneItem;
+        [ChangeColorLabel(0.2f, 1, 1)] public Button _buyItem;
+        [ChangeColorLabel(0.2f, 1, 1)] public Text _money;
+    }
+
+    [Serializable]
+    public class UiGameController
+    {
+        [HeaderTextColor(0.2f, .7f, .8f, headerText = "Ui Controller")] [ChangeColorLabel(0.2f, 1, 1)]
+        public Text _money;
+
+        [ChangeColorLabel(0.2f, 1, 1)] public Timer _timer;
+        [ChangeColorLabel(0.2f, 1, 1)] public Text _bulletCount;
+        [ChangeColorLabel(0.2f, 1, 1)] public Text _killZombies;
+        [ChangeColorLabel(0.2f, 1, 1)] public Transform _win;
+        [ChangeColorLabel(0.2f, 1, 1)] public Transform _lose;
+        [ChangeColorLabel(0.2f, 1, 1)] public Image _healthInGUI;
+        [ChangeColorLabel(0.2f, 1, 1)] public Image _giapInGUI;
     }
 
     [Serializable]
@@ -879,8 +918,8 @@ namespace Ring
 
                     if (_instance == null)
                     {
-                        Debug.LogError("An instance of " + typeof(T) +
-                                       " is needed in the scene, but there is none.");
+                        Debug.LogWarning("An instance of " + typeof(T) +
+                                         " is needed in the scene, but there is none.");
                     }
                 }
 

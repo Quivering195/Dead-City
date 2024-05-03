@@ -16,9 +16,14 @@ public class BulletController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
+    private void OnEnable()
+    {
+    }
+
     // Update is called once per frame
     void Start()
     {
+        MusicManager.Instance.PlayAudio_Grenade();
         _rigidbody.velocity = transform.forward * _speed;
     }
 
@@ -31,6 +36,12 @@ public class BulletController : MonoBehaviour
         else
         {
             LeanPool.Spawn(vfxNoDamage, transform.position, Quaternion.identity);
+        }
+
+        if (other.gameObject.CompareTag("ZombieBody"))
+        {
+            other.gameObject.GetComponent<ZombieHealth>()._health +=
+                -(int)GameManager.Instance._dataGame.damage * (GameManager.Instance._dataGame.currentWeapon==2 ? 5:2)*5;
         }
 
         Destroy(gameObject);

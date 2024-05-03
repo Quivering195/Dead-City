@@ -1,28 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Ring;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameManager : RingSingleton<GameManager>
 {
     public GameController _gameController;
     public DataGame _dataGame;
+    public bool _isCheckWin;
 
     private void Start()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
-        CreateData();
         _dataGame = LoadDataGame();
+        CreateData();
     }
 
     void CreateData()
     {
-        PlayerController.Instance.playerSkins._listSkin.ForEach(a => a.gameObject.SetActive(false));
-        PlayerController.Instance.playerSkins._listSkin[LoadSkin()].gameObject.SetActive(true);
-        SaveDataGame(new DataGame(new List<int>() { 1, 2, 3 }, new List<int>() { 1, 2, 3 }, 0, 10f, 50f, 100, 5000));
+        PlayerMenuScene.Instance.playerSkins._listSkin.ForEach(a => a.gameObject.SetActive(false));
+        PlayerMenuScene.Instance.playerSkins._listSkin[_dataGame.currentSkin].gameObject.SetActive(true);
+
+        ChangeSkin(_dataGame.currentSkin); //lấy trang phục trước đó lưu
     }
 
     #region Save and Load
@@ -31,12 +35,13 @@ public class GameManager : RingSingleton<GameManager>
 
     public void SaveLevel(string name)
     {
-        PlayerPrefs.SetString("Level", name);
+        _dataGame.level = Convert.ToInt32(name);
+        SaveDataGame(_dataGame);
     }
 
     public string LoadLevel()
     {
-        return PlayerPrefs.GetString("Level", null);
+        return _dataGame.level.ToString();
     }
 
     #endregion
@@ -83,19 +88,56 @@ public class GameManager : RingSingleton<GameManager>
 
     public void SaveSkin(int value)
     {
-        PlayerPrefs.SetInt("SkinPlayer", value);
-        _gameController._currentBuy = 0;
+        if (!_dataGame._listSkin.Contains(value))
+        {
+            _dataGame._listSkin.Add(value);
+            _dataGame.currentSkin = value;
+            SaveDataGame(_dataGame);
+            _gameController._currentBuy = 0;
+        }
     }
+
 
     public void ChangeSkin(int value)
     {
-        PlayerController.Instance.playerSkins._listSkin.ForEach(a => a.gameObject.SetActive(false));
-        PlayerController.Instance.playerSkins._listSkin[value].gameObject.SetActive(true);
+        PlayerMenuScene.Instance.playerSkins._listSkin.ForEach(a => a.gameObject.SetActive(false));
+        PlayerMenuScene.Instance.playerSkins._listSkin[value].gameObject.SetActive(true);
     }
 
-    public int LoadSkin()
+    #endregion
+
+    #region Weapon Player
+
+    public void SaveWeapon(int value)
     {
-        return PlayerPrefs.GetInt("SkinPlayer", 0);
+        if (!_dataGame._listWeapon.Contains(value))
+        {
+            _dataGame._listWeapon.Add(value);
+            _dataGame.currentWeapon = value;
+            SaveDataGame(_dataGame);
+            _gameController._currentBuy = 0;
+        }
+    }
+
+    public void ChangeWeapon(int value)
+    {
+        PlayerMenuScene.Instance.playerSkins._listWeapon.ForEach(a => a.gameObject.SetActive(false));
+        PlayerMenuScene.Instance.playerSkins._listWeapon[value].gameObject.SetActive(true);
+    }
+
+    #endregion
+
+    #region Money
+
+    public void SaveMoney(int value)
+    {
+        _dataGame.money += value;
+        if (UiManager.Instance != null)
+        {
+            UiManager.Instance.UpdateMoney(_dataGame.money);
+        }
+
+        SaveDataGame(_dataGame);
     }
 
     #endregion
@@ -127,8 +169,12 @@ public class GameManager : RingSingleton<GameManager>
         }
         else
         {
-            Debug.LogWarning("File not found: " + filePath);
-            return null;
+            DataGame _dataGame = new DataGame(new List<int>() { 0 }, new List<int>() { 0 }, 0, 0, 10f,
+                50f, 100,
+                5000, 0, new List<string>(), new List<int>());
+            SaveDataGame(_dataGame);
+            string jsonData = File.ReadAllText(filePath);
+            return JsonUtility.FromJson<DataGame>(jsonData);
         }
     }
 
@@ -175,25 +221,36 @@ public class GameManager : RingSingleton<GameManager>
     #endregion Method Game
 }
 
+[Serializable]
 public class DataGame
 {
     public List<int> _listSkin;
     public List<int> _listWeapon;
     public int currentSkin;
+    public int currentWeapon;
     public float damage;
     public float speed;
     public int health;
     public int money;
+    public int level;
+    public List<string> timePlay;
+    public List<int> killPlay;
 
-    public DataGame(List<int> listSkin, List<int> listWeapon, int currentSkin, float damage, float speed, int health,
-        int money)
+    public DataGame(List<int> listSkin, List<int> listWeapon, int currentSkin,
+        int currentWeapon, float damage,
+        float speed, int health,
+        int money, int level, List<string> timePlay, List<int> killPlay)
     {
         _listSkin = listSkin;
         _listWeapon = listWeapon;
         this.currentSkin = currentSkin;
+        this.currentWeapon = currentSkin;
         this.damage = damage;
         this.speed = speed;
         this.health = health;
         this.money = money;
+        this.level = level;
+        this.timePlay = timePlay;
+        this.killPlay = killPlay;
     }
 }

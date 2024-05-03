@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AttackState : State
 {
-    public AttackState(BotManager botManager, FiniteStateMachine stateMachine, string animName) : base(botManager,
+    public AttackState(BotManager botManager, FiniteStateMachine stateMachine, string animName,
+        D_AttackState dataState) : base(botManager,
         stateMachine, animName)
     {
     }

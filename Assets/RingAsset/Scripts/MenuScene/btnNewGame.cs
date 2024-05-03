@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,6 +18,18 @@ public class btnNewGame : MonoBehaviour
     {
         UiManager.Instance._uiController._loadScene.gameObject.SetActive(true);
         UiManager.Instance._uiController._fillAmountController.isCheckLoadMap = true;
+        // Xóa dữ liệu game cũ nếu có
+        string filePath = Path.Combine(Application.persistentDataPath, "DataGame");
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+        }
+
+        GameManager.Instance._dataGame = new DataGame(new List<int>() { 0 }, new List<int>() { 0 },
+            0, 0, 10f,
+            50f, 100,
+            5000, 1, new List<string>(), new List<int>());
+        GameManager.SaveDataGame(GameManager.Instance._dataGame);
         StartCoroutine(LoadSceneCoroutine(Settings.SceneName1));
     }
 

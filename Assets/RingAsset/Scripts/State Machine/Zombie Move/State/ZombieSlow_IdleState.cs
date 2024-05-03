@@ -14,11 +14,15 @@ public class ZombieSlow_IdleState : IdleState
     public override void Enter()
     {
         base.Enter();
+        zombieSlow._botController._animator.SetBool("Idle", true);
+        zombieSlow._botController._animator.SetBool("Attack", false);
+        zombieSlow._botController._animator.SetBool("Move", false);
     }
 
     public override void Exit()
     {
         base.Exit();
+        //zombieSlow._botController._animator.SetBool("Idle", false);
     }
 
     public override void LogicUpdate()
@@ -27,13 +31,15 @@ public class ZombieSlow_IdleState : IdleState
         if (zombieSlow._botController._isFindPlayer)
         {
             Debug.LogError("Player");
-            Vector3 direction = PlayerController.Instance.transform.position -
-                                zombieSlow._botController._transform.position;
-            Quaternion rotation = Quaternion.LookRotation(direction);
-            float rotationSpeed = 0.1f;
-            Quaternion newRotation =
-                Quaternion.Lerp(zombieSlow._botController._transform.rotation, rotation, rotationSpeed);
-            zombieSlow._botController._transform.rotation = newRotation;
+            if (Vector3.Distance(zombieSlow.transform.position, PlayerController.Instance.transform.position) < 2)
+            {
+                Debug.Log("Attack");
+                stateMachine.ChangeState(zombieSlow.attackState);
+            }
+            else
+            {
+                stateMachine.ChangeState(zombieSlow.moveState);
+            }
         }
         else
         {

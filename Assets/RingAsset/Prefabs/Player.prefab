@@ -163,17 +163,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _changDestroy: 1
   playerComponent:
-    _rigidbody: {fileID: 2360242065452162522}
-    _objectModel: {fileID: 7248774324212851145}
+    _transform: {fileID: 0}
     _collider: {fileID: 4027393415661739993}
-  playerMovement:
-    _direction: {x: 0, y: 0, z: 0}
-    _speed: 255
-    _moveX: 0
-    _moveY: 0
-  CinemachineCameraTarget: {fileID: 0}
-  BottomClamp: -30
-  TopClamp: 70
+    _thirdPersonShooterController: {fileID: 0}
+    _animator: {fileID: 0}
+  _playerSkins:
+    _listSkin: []
+    _listWeapon: []
+  _playerWeapon:
+    _listWeapons: []
+  _playerHealth:
+    _health: 0
+    _giap: 0
+    _healthInGUI: {fileID: 0}
+    _giapInGUI: {fileID: 0}
+  _starterAssetsInputs: {fileID: 0}
+  _ThirdPersonController: {fileID: 0}
 --- !u!114 &7791784357205852734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,11 +334,6 @@ GameObject:
 --- !u!1 &7131347682776449674 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3115408949270197328, guid: 3bc5bc93bccfe2d43a38e209a6a05afc, type: 3}
-  m_PrefabInstance: {fileID: 5317490028658603738}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7248774324212851145 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3266047434573043475, guid: 3bc5bc93bccfe2d43a38e209a6a05afc, type: 3}
   m_PrefabInstance: {fileID: 5317490028658603738}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &9183594032459522898 stripped

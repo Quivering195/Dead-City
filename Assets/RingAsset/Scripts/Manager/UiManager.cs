@@ -7,13 +7,8 @@ public class UiManager : RingSingleton<UiManager>
 {
     public UiController _uiController;
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateMoney(int value)
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        _uiController._money.text = "Money: " + value;
     }
 }

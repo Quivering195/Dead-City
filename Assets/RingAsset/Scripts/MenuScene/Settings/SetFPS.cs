@@ -22,10 +22,14 @@ public class SetFPS : MonoBehaviour
         if (_toggle30FPS.isOn)
         {
             GameManager.Instance.SaveFPS(0);
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 30;
         }
         else
         {
             GameManager.Instance.SaveFPS(1);
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 60;
         }
     }
 }

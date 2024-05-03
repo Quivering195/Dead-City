@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterController>
 {
@@ -17,6 +18,13 @@ public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterCont
 
     public Transform _positionSpawnBullet;
 
+    public Text _sumBullet;
+
+    // Giảm giá trị của _bullet.text
+    string[] bulletInfo;
+    int currentBullets;
+    int totalBullets;
+
     private void Start()
     {
         for (int i = 0; i < Input.GetJoystickNames().Length; i++)
@@ -26,7 +34,13 @@ public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterCont
                 isCheck = true;
                 break;
             }
-        }
+        } // Giảm giá trị của _bullet.text
+
+        _shooterController._starterAssetsInputs.shoot = true;
+        _shooterController._isCheckReload = false;
+        bulletInfo = _sumBullet.text.Split('/');
+        currentBullets = int.Parse(bulletInfo[0]);
+        totalBullets = int.Parse(bulletInfo[1]);
     }
 
     private void Update()
@@ -47,6 +61,32 @@ public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterCont
             _shooterController._animator.SetLayerWeight(2, 1);
             _shooterController._animator.SetTrigger("Reload");
         }
+    }
+
+    public void StartReload()
+    {
+        _shooterController._isCheckReload = true;
+        if (totalBullets > 0)
+        {
+            currentBullets = 0;
+            if (GameManager.Instance._dataGame.currentWeapon == 2)
+            {
+                currentBullets += 45;
+                totalBullets -= 45;
+            }
+            else
+            {
+                currentBullets += 60;
+                totalBullets -= 60;
+            }
+
+            _sumBullet.text = currentBullets + "/" + totalBullets;
+        }
+    }
+
+    public void EndReload()
+    {
+        _shooterController._isCheckReload = false;
     }
 
     private void MouseSentivity(Vector3 mouseWorltPosition)
@@ -109,14 +149,27 @@ public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterCont
             _shooterController._starterAssetsInputs.shoot = false;
         }
 
-        if (_shooterController._starterAssetsInputs.shoot && _shooterController._starterAssetsInputs.aim)
+        if (_shooterController._starterAssetsInputs.shoot && _shooterController._starterAssetsInputs.aim &&
+            !_shooterController._isCheckReload)
         {
             Debug.Log(1);
-            MusicManager.Instance.PlayAudio_Grenade();
-            Vector3 aimDir = (mouseWorltPosition - _positionSpawnBullet.position).normalized;
-            LeanPool.Spawn(_prefabButlletSpawn, _positionSpawnBullet.position,
-                Quaternion.LookRotation(aimDir, Vector3.up));
+            //MusicManager.Instance.PlayAudio_Grenade();
+
             //_shooterController._starterAssetsInputs.shoot = false;
+
+            if (currentBullets > 0)
+            {
+                Vector3 aimDir = (mouseWorltPosition - _positionSpawnBullet.position).normalized;
+                Instantiate(_prefabButlletSpawn, _positionSpawnBullet.position,
+                    Quaternion.LookRotation(aimDir, Vector3.up));
+                currentBullets--;
+                _sumBullet.text = currentBullets.ToString() + "/" + totalBullets.ToString();
+            }
+            else
+            {
+                // Khi hết đạn, kích hoạt trigger reload
+                //_shooterController._animator.SetTrigger("Reload");
+            }
         }
     }
 

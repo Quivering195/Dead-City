@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - CinemachineTarget
   - Bullet
+  - ZombieBody
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - Ground
   - Player
   - Bullet
-  - 
-  - 
+  - Zombie
+  - ZombieBody
   - 
   - 
   - 

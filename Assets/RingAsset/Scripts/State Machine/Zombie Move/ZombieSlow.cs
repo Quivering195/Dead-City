@@ -4,14 +4,17 @@ public class ZombieSlow : BotManager
 {
     public ZombieSlow_IdleState idleState { get; private set; }
     public ZombieSlow_MoveState moveState { get; private set; }
+    public ZombieSlow_AttackState attackState { get; private set; }
     [SerializeField] private D_IdleState _idleState;
     [SerializeField] private D_MoveState _moveState;
+    [SerializeField] private D_AttackState _attackState;
 
     public override void Start()
     {
         base.Start();
-        moveState = new ZombieSlow_MoveState(this, stateMachine, "move", _moveState, this);
-        idleState = new ZombieSlow_IdleState(this, stateMachine, "idle", _idleState, this);
+        moveState = new ZombieSlow_MoveState(this, stateMachine, "Move", _moveState, this);
+        idleState = new ZombieSlow_IdleState(this, stateMachine, "Idle", _idleState, this);
+        attackState = new ZombieSlow_AttackState(this, stateMachine, "Attack", _attackState, this);
         stateMachine.Initialize(idleState);
     }
 
@@ -48,6 +51,27 @@ public class ZombieSlow : BotManager
         }
     }
 
+//
+    public LayerMask playerLayer; // Layer của player
+    public float radius = 2f; // Bán kính của vùng kiểm tra
+
+    public void CheckForPlayersInRange()
+    {
+        // Tìm tất cả các collider trong vùng phạm vi
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, playerLayer);
+
+        // Kiểm tra từng collider nếu nó là player
+        foreach (Collider col in colliders)
+        {
+            // Gửi thông điệp đến PlayerController nếu collider có tag là player
+            if (col.CompareTag("Player"))
+            {
+                PlayerController.Instance.GetAttack(-5);
+            }
+        }
+    }
+
+//
     private void OnDrawGizmos()
     {
         // Vẽ hình cầu trong Scene
