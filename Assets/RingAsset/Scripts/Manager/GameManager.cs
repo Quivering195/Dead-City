@@ -171,7 +171,7 @@ public class GameManager : RingSingleton<GameManager>
         {
             DataGame _dataGame = new DataGame(new List<int>() { 0 }, new List<int>() { 0 }, 0, 0, 10f,
                 50f, 100,
-                5000, 0, new List<string>(), new List<int>());
+                5000, 0, new List<string>());
             SaveDataGame(_dataGame);
             string jsonData = File.ReadAllText(filePath);
             return JsonUtility.FromJson<DataGame>(jsonData);
@@ -234,12 +234,11 @@ public class DataGame
     public int money;
     public int level;
     public List<string> timePlay;
-    public List<int> killPlay;
 
     public DataGame(List<int> listSkin, List<int> listWeapon, int currentSkin,
         int currentWeapon, float damage,
         float speed, int health,
-        int money, int level, List<string> timePlay, List<int> killPlay)
+        int money, int level, List<string> timePlay)
     {
         _listSkin = listSkin;
         _listWeapon = listWeapon;
@@ -251,6 +250,5 @@ public class DataGame
         this.money = money;
         this.level = level;
         this.timePlay = timePlay;
-        this.killPlay = killPlay;
     }
 }

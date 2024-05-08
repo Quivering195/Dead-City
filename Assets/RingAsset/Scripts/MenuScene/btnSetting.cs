@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class btnSetting : MonoBehaviour
@@ -21,6 +22,14 @@ public class btnSetting : MonoBehaviour
 
     private void ActionClick()
     {
+        if (!SceneManager.GetActiveScene().name.Equals("MenuScene"))
+        {
+            if (!UIGameManager.Instance.isCursorVisible)
+            {
+                return;
+            }
+        }
+
         _popupSetting.gameObject.SetActive(true);
         _transformOff.gameObject.SetActive(false);
     }

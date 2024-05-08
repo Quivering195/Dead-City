@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Data_ZombieSlow_Move
   m_EditorClassIdentifier: 
   name: move
-  speed: 15
+  speed: 1

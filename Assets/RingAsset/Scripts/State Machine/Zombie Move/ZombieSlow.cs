@@ -7,7 +7,7 @@ public class ZombieSlow : BotManager
     public ZombieSlow_AttackState attackState { get; private set; }
     [SerializeField] private D_IdleState _idleState;
     [SerializeField] private D_MoveState _moveState;
-    [SerializeField] private D_AttackState _attackState;
+    [SerializeField] public D_AttackState _attackState;
 
     public override void Start()
     {
@@ -66,7 +66,7 @@ public class ZombieSlow : BotManager
             // Gửi thông điệp đến PlayerController nếu collider có tag là player
             if (col.CompareTag("Player"))
             {
-                PlayerController.Instance.GetAttack(-5);
+                PlayerController.Instance.GetAttack(-(int)_attackState.damage);
             }
         }
     }

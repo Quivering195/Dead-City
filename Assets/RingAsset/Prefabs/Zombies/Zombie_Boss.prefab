@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 9003157309351575981}
   - component: {fileID: 8447913658746869199}
   - component: {fileID: 8436941460388879719}
+  - component: {fileID: 7710243181012463945}
   m_Layer: 9
   m_Name: Zombie_Boss
   m_TagString: ZombieBody
@@ -247,9 +248,9 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 128
     _radius: 8
-  _idleState: {fileID: 11400000, guid: 5127cd8393961c845b2d266dd4edda86, type: 2}
-  _moveState: {fileID: 11400000, guid: 0e16d64eafe6f8d40aa47504a3d27b7d, type: 2}
-  _attackState: {fileID: 11400000, guid: 8211636f7b4a92b4e962577fd9d92b6a, type: 2}
+  _idleState: {fileID: 11400000, guid: 11a5fa75d8e65e04d9501e2c3be92baa, type: 2}
+  _moveState: {fileID: 11400000, guid: 23e9754caa3f0df4db337f7a8e3990ed, type: 2}
+  _attackState: {fileID: 11400000, guid: 042545d928a23fd40ac4d1751855f7d9, type: 2}
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -266,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bbfae303c00b24692ac031aaee42fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dataZombies: {fileID: 11400000, guid: e678ee70759f43f4cae3ed2a11eec796, type: 2}
+  _dataZombies: {fileID: 11400000, guid: 12fd084ac5d226b45ab7bc39225655cb, type: 2}
   _animator: {fileID: 2569009941541419554}
   _health: 0
   _speed: 0
@@ -350,6 +351,20 @@ MonoBehaviour:
     - {fileID: 6250624635023433796}
     - {fileID: 3947693688160362990}
     - {fileID: 1233447006974900784}
+--- !u!114 &7710243181012463945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113143922466407580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff02054c1318dca4489249d7945ae091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _zombieHealth: {fileID: 8447913658746869199}
+  _zombieSlow: {fileID: 9003157309351575981}
 --- !u!1 &143229209626464784
 GameObject:
   m_ObjectHideFlags: 0

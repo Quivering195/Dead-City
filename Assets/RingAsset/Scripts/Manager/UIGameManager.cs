@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Ring;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIGameManager : RingSingleton<UIGameManager>
 {
     public UiGameController _uiGameController;
     public int _killUpdateInGame;
-    bool isCursorVisible = false;
+    public bool isCursorVisible = false;
+
+    public Text _missionKill;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +21,7 @@ public class UIGameManager : RingSingleton<UIGameManager>
         //bắt đầu thời gian đếm
         _uiGameController._timer.StartTimer();
         _killUpdateInGame = 0;
+        _missionKill.text = "Mission: " + ListZombieController.Instance._listZombies.Count;
     }
 
     private void Update()
@@ -25,7 +29,8 @@ public class UIGameManager : RingSingleton<UIGameManager>
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             isCursorVisible = !isCursorVisible;
-            if (isCursorVisible)
+
+            if (!isCursorVisible)
             {
                 Cursor.lockState = CursorLockMode.None;
             }

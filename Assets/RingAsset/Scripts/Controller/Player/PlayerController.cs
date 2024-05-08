@@ -32,6 +32,7 @@ public class PlayerController : RingSingleton<PlayerController>
         _playerSkins._listSkin.ForEach(a => a.gameObject.SetActive(false));
         _playerSkins._listSkin[GameManager.Instance._dataGame.currentSkin].gameObject.SetActive(true);
         _playerHealth._health = GameManager.Instance._dataGame.health;
+        Debug.Log(_playerHealth._health);
         _playerHealth._giap = 100;
     }
 

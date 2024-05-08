@@ -8,8 +8,7 @@ public class btnContinueInGame : MonoBehaviour
 {
     public Button _button;
     public Transform _transformOff;
-    public StarterAssetsInputs _starterAssetsInputs;
-    public ThirdPersonController _ThirdPersonController;
+
 
     private void OnEnable()
     {
@@ -19,7 +18,7 @@ public class btnContinueInGame : MonoBehaviour
     private void ActionClick()
     {
         _transformOff.gameObject.SetActive(false);
-        _starterAssetsInputs.enabled = true;
-        _ThirdPersonController.enabled = true;
+        PlayerController.Instance._starterAssetsInputs.enabled = true;
+        PlayerController.Instance._ThirdPersonController.enabled = true;
     }
 }

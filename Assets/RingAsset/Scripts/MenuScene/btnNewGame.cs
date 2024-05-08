@@ -28,7 +28,7 @@ public class btnNewGame : MonoBehaviour
         GameManager.Instance._dataGame = new DataGame(new List<int>() { 0 }, new List<int>() { 0 },
             0, 0, 10f,
             50f, 100,
-            5000, 1, new List<string>(), new List<int>());
+            5000, 1, new List<string>());
         GameManager.SaveDataGame(GameManager.Instance._dataGame);
         StartCoroutine(LoadSceneCoroutine(Settings.SceneName1));
     }

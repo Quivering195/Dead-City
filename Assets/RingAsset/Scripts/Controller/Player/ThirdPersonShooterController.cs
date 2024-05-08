@@ -18,7 +18,6 @@ public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterCont
 
     public Transform _positionSpawnBullet;
 
-    public Text _sumBullet;
 
     // Giảm giá trị của _bullet.text
     string[] bulletInfo;
@@ -38,7 +37,7 @@ public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterCont
 
         _shooterController._starterAssetsInputs.shoot = true;
         _shooterController._isCheckReload = false;
-        bulletInfo = _sumBullet.text.Split('/');
+        bulletInfo = UIGameManager.Instance._uiGameController._bulletCount.text.Split('/');
         currentBullets = int.Parse(bulletInfo[0]);
         totalBullets = int.Parse(bulletInfo[1]);
     }
@@ -80,7 +79,7 @@ public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterCont
                 totalBullets -= 60;
             }
 
-            _sumBullet.text = currentBullets + "/" + totalBullets;
+            UIGameManager.Instance._uiGameController._bulletCount.text = currentBullets + "/" + totalBullets;
         }
     }
 
@@ -163,7 +162,8 @@ public class ThirdPersonShooterController : RingSingleton<ThirdPersonShooterCont
                 Instantiate(_prefabButlletSpawn, _positionSpawnBullet.position,
                     Quaternion.LookRotation(aimDir, Vector3.up));
                 currentBullets--;
-                _sumBullet.text = currentBullets.ToString() + "/" + totalBullets.ToString();
+                UIGameManager.Instance._uiGameController._bulletCount.text =
+                    currentBullets.ToString() + "/" + totalBullets.ToString();
             }
             else
             {

@@ -3725,7 +3725,6 @@ MonoBehaviour:
   _transform: {fileID: 0}
   _prefabButlletSpawn: {fileID: 7260270630959934855, guid: 50c6b1c6ce1206147a7a48bab673494e, type: 3}
   _positionSpawnBullet: {fileID: 862574958341622515}
-  _sumBullet: {fileID: 0}
 --- !u!114 &7695865895774355679
 MonoBehaviour:
   m_ObjectHideFlags: 0

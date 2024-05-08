@@ -24,8 +24,9 @@ public class NextScene : MonoBehaviour
         if (levelCount >= 4)
         {
             levelCount = 1;
-            GameManager.Instance.SaveLevel(levelCount.ToString());
         }
+
+        GameManager.Instance.SaveLevel(levelCount.ToString());
 
         SaveRank();
 
@@ -42,13 +43,11 @@ public class NextScene : MonoBehaviour
         {
             //add vào luôn
             GameManager.Instance._dataGame.timePlay.Add(newTime);
-            GameManager.Instance._dataGame.killPlay.Add(newKill);
             Debug.LogError(newKill);
         }
         else
         {
-            //sắp xếp chúng
-            GameManager.Instance._dataGame.killPlay.Add(newKill);
+            /////
             DateTime timeA = DateTime.ParseExact(newTime, "HH:mm", null);
             List<DateTime> timeBList = GameManager.Instance._dataGame.timePlay
                 .Select(time => DateTime.ParseExact(time, "HH:mm", null)).ToList();
@@ -57,18 +56,7 @@ public class NextScene : MonoBehaviour
             List<string> sortedTimeStringList = sortedTimeList.Select(time => time.ToString("HH:mm")).ToList();
             GameManager.Instance._dataGame.timePlay = sortedTimeStringList;
             Debug.LogError("Sort");
-            // Ánh xạ lại danh sách killPlay theo danh sách timePlay mới đã sắp xếp
-            List<int> newKillPlay = new List<int>();
-            foreach (var timeString in sortedTimeStringList)
-            {
-                int index = GameManager.Instance._dataGame.timePlay.IndexOf(timeString);
-                if (index != -1 && index < GameManager.Instance._dataGame.killPlay.Count)
-                {
-                    newKillPlay.Add(GameManager.Instance._dataGame.killPlay[index]);
-                }
-            }
-
-            GameManager.Instance._dataGame.killPlay = newKillPlay;
+            /////
         }
 
         GameManager.SaveDataGame(GameManager.Instance._dataGame);

@@ -3509,9 +3509,9 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 128
     _radius: 8
-  _idleState: {fileID: 11400000, guid: 5127cd8393961c845b2d266dd4edda86, type: 2}
-  _moveState: {fileID: 11400000, guid: 0e16d64eafe6f8d40aa47504a3d27b7d, type: 2}
-  _attackState: {fileID: 11400000, guid: 8211636f7b4a92b4e962577fd9d92b6a, type: 2}
+  _idleState: {fileID: 11400000, guid: c0fd90f81d93b9e4c81402005f3dd063, type: 2}
+  _moveState: {fileID: 11400000, guid: da699a5e2e4271e45ae2ba9143c4546a, type: 2}
+  _attackState: {fileID: 11400000, guid: edcb27db80cb2c4478d9b7dedc5c2730, type: 2}
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -3528,7 +3528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bbfae303c00b24692ac031aaee42fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dataZombies: {fileID: 11400000, guid: e678ee70759f43f4cae3ed2a11eec796, type: 2}
+  _dataZombies: {fileID: 11400000, guid: 33b6f30d4dce61443876669e51f192b0, type: 2}
   _animator: {fileID: 6923813962347895985}
   _health: 0
   _speed: 0

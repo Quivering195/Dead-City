@@ -22,6 +22,8 @@ public class ItemWeapon : MonoBehaviour
         int value = Convert.ToInt32(_text.text) - 1;
         //GameManager.Instance.ChangeWeapon(value);=> in game
         GameManager.Instance._gameController._currentBuy = value;
+        UiManager.Instance._listGunInShop.ForEach(a => a.gameObject.SetActive(false));
+        UiManager.Instance._listGunInShop[value].gameObject.SetActive(true);
         if (value == 1 || value == 2)
         {
             UiManager.Instance._uiController._priceItem.GetComponent<Text>().text = 240.ToString();

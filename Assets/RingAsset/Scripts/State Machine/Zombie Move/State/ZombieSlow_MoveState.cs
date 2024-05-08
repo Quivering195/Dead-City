@@ -40,8 +40,8 @@ public class ZombieSlow_MoveState : MoveState
         zombieSlow._botController._transform.rotation = newRotation;
 
         // Di chuyển zombie tới vị trí của player trên mặt phẳng x-z
-        float moveSpeed = 1f; // Tốc độ di chuyển
-        Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
+        //float moveSpeed = 1f; // Tốc độ di chuyển
+        Vector3 movement = direction.normalized * zombieSlow.moveState.dataState.speed * Time.deltaTime;
         zombieSlow._botController._rigidbody.MovePosition(zombieSlow._botController._rigidbody.position + movement);
         if (Vector3.Distance(zombieSlow.transform.position, PlayerController.Instance.transform.position) < 2)
         {

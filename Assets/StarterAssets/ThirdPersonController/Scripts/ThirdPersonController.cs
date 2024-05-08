@@ -151,6 +151,8 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            MoveSpeed += GameManager.Instance._dataGame.speed * .01f;
+            SprintSpeed += GameManager.Instance._dataGame.speed * .01f;
         }
 
         private void Update()
@@ -217,14 +219,12 @@ namespace StarterAssets
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
             if (targetSpeed == SprintSpeed)
             {
-                Debug.Log(1);
                 ThirdPersonShooterController.Instance._shooterController._animator.SetLayerWeight(1,
                     Mathf.Lerp(ThirdPersonShooterController.Instance._shooterController._animator.GetLayerWeight(1), 1f,
                         Time.deltaTime * 10f));
             }
             else if (targetSpeed == MoveSpeed)
             {
-                //Debug.Log(2);
                 ThirdPersonShooterController.Instance._shooterController._animator.SetLayerWeight(1,
                     Mathf.Lerp(ThirdPersonShooterController.Instance._shooterController._animator.GetLayerWeight(1), 0f,
                         Time.deltaTime * 10f));
